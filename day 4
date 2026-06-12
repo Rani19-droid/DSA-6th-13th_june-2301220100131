@@ -1,0 +1,48 @@
+//Maximum avg sub array
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        //sum=55
+        int s = 0;
+        for(int i = 0; i<k; i++){
+            s += nums[i];
+        }
+        //slidung window
+    
+    int ans = s; 
+        for(int i = k; i<nums.length; ++i){
+           s +=(nums[i] - nums[i-k]);
+           ans = Math.max(ans , s);
+        }
+       
+        return ans * 1.0/k;
+    }
+}
+//K Radius Subarray Averages
+class Solution {
+    public int[] getAverages(int[] nums, int k) {
+        int n = nums.length;
+        int []ans = new int[n];
+        Arrays.fill(ans, -1);
+         long s = 0;
+         int size= 2*k +1;
+
+            if(size > n){
+                return ans;
+            
+            }
+            for(int i = 0; i<size; i++){
+                s += nums[i]; 
+            }
+            ans[k] = (int)(s/size);
+            for(int i = size; i<n; i++){
+                s = s + nums[i];
+                s = s - nums[i- size];
+                k++; 
+                ans[k]  = (int)(s/size);
+            }
+            return ans;
+
+        
+        
+    }
+}
